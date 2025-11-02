@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>DriveAway Rentals — Book a Car</title>
+    <style>
+        :root{
+            --accent:#0b74de;
+            --muted:#6b7280;
+            --card:#f8fafc;
+            --bg:#f3f6fb;
+            --radius:10px;
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+        body{margin:0;background:var(--bg);color:#0f1724;line-height:1.4}
+        .container{max-width:1100px;margin:28px auto;padding:20px}
+        header{display:flex;align-items:center;gap:18px}
+        .logo{display:flex;align-items:center;gap:10px}
+        .logo .mark{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#2bb673);display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+        h1{font-size:1.5rem;margin:0}
+        p.lead{margin:6px 0 18px;color:var(--muted)}
+        .grid{display:grid;grid-template-columns:1fr 380px;gap:20px}
+        .card{background:white;border-radius:var(--radius);padding:18px;box-shadow:0 6px 18px rgba(16,24,40,.06)}
+        .fleet{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:12px}
+        .car{background:var(--card);padding:10px;border-radius:10px;display:flex;gap:12px;align-items:center}
+        .car img{width:80px;height:56px;object-fit:cover;border-radius:6px}
+        .car .meta{flex:1}
+        .car .meta h4{margin:0;font-size:0.95rem}
+        .car .meta p{margin:4px 0 0;color:var(--muted);font-size:0.85rem}
+        form .row{display:flex;gap:8px}
+        label{display:block;font-size:0.85rem;margin-bottom:6px;color:var(--muted)}
+        input,select,button,textarea{font:inherit}
+        input,select{width:100%;padding:10px;border-radius:8px;border:1px solid #e6eef8;background:white}
+        .two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+        .extras{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+        .chip{background:var(--card);padding:8px 10px;border-radius:999px;border:1px solid #eaeef6;font-size:0.9rem;cursor:pointer}
+        .chip input{margin-right:8px}
+        .estimate{background:linear-gradient(180deg,#fff,#f8fbff);padding:12px;border-radius:8px;border:1px dashed #e6eef8}
+        .actions{display:flex;gap:8px;align-items:center;margin-top:12px}
+        button.primary{background:var(--accent);color:white;padding:10px 14px;border-radius:8px;border:0;cursor:pointer}
+        button.ghost{background:transparent;border:1px solid #e6eef8;padding:10px 12px;border-radius:8px;cursor:pointer}
+        footer{margin-top:20px;color:var(--muted);font-size:0.9rem;text-align:center}
+        @media (max-width:880px){ .grid{grid-template-columns:1fr} .fleet{grid-template-columns:1fr 1fr} }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="mark">DA</div>
+                <div>
+                    <h1>DriveAway Rentals</h1>
+                    <div class="lead">Reliable cars, transparent pricing — book in seconds.</div>
+                </div>
+            </div>
+        </header>
+
+        <main class="grid" aria-live="polite">
+            <section>
+                <div class="card">
+                    <h2 style="margin:0 0 6px">Available fleet</h2>
+                    <p class="lead" style="margin-bottom:12px">Choose a car that suits your trip — economy to premium.</p>
+
+                    <div class="fleet" id="fleet">
+                        <!-- Cars are rendered via JS -->
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top:14px">
+                    <h3 style="margin:0 0 10px">How it works</h3>
+                    <ol style="margin:0 0 0 18px;color:var(--muted)">
+                        <li>Pick a car, dates and extras</li>
+                        <li>See instant price estimate</li>
+                        <li>Submit booking request — we'll contact you</li>
+                    </ol>
+                </div>
+            </section>
+
+            <aside>
+                <div class="card">
+                    <h3 style="margin:0 0 8px">Book a car</h3>
+                    <form id="bookingForm" novalidate>
+                        <div>
+                            <label for="carSelect">Select car</label>
+                            <select id="carSelect" required>
+                                <!-- options filled by JS -->
+                            </select>
+                        </div>
+
+                        <div class="two" style="margin-top:10px">
+                            <div>
+                                <label for="pickup">Pick-up date</label>
+                                <input id="pickup" type="date" required />
+                            </div>
+                            <div>
+                                <label for="dropoff">Drop-off date</label>
+                                <input id="dropoff" type="date" required />
+                            </div>
+                        </div>
+
+                        <div style="margin-top:10px">
+                            <label for="name">Full name</label>
+                            <input id="name" type="text" placeholder="Jane Doe" required />
+                        </div>
+
+                        <div class="two" style="margin-top:10px">
+                            <div>
+                                <label for="email">Email</label>
+                                <input id="email" type="email" placeholder="you@example.com" required />
+                            </div>
+                            <div>
+                                <label for="phone">Phone</label>
+                                <input id="phone" type="tel" placeholder="+1 555 555 5555" pattern="[\d+\-\s()]{7,}" required />
+                            </div>
+                        </div>
+
+                        <div style="margin-top:10px">
+                            <label>Extras</label>
+                            <div class="extras" id="extras">
+                                <label class="chip"><input type="checkbox" value="gps" />GPS — $5/day</label>
+                                <label class="chip"><input type="checkbox" value="child" />Child seat — $3/day</label>
+                                <label class="chip"><input type="checkbox" value="ins" />Premium insurance — $12/day</label>
+                            </div>
+                        </div>
+
+                        <div style="margin-top:12px" class="estimate">
+                            <div style="display:flex;justify-content:space-between;align-items:center">
+                                <strong>Estimated total</strong>
+                                <div id="totalPrice" style="font-size:1.1rem;font-weight:700">$0.00</div>
+                            </div>
+                            <div style="margin-top:8px;color:var(--muted);font-size:0.9rem" id="estimateDetails">Select dates and a car to see the estimate.</div>
+                        </div>
+
+                        <div class="actions">
+                            <button type="submit" class="primary">Request booking</button>
+                            <button type="button" class="ghost" id="resetBtn">Reset</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div style="height:12px"></div>
+
+                <div class="card">
+                    <h4 style="margin:0 0 8px">Contact</h4>
+                    <p style="margin:0;color:var(--muted)">Phone: +1 (555) 123-4567<br/>Email: hello@driveaway.example</p>
+                </div>
+            </aside>
+        </main>
+
+        <footer>
+            Demo car booking page — no payment collected. Data is not sent anywhere.
+        </footer>
+    </div>
+
+    <script>
+        // Sample fleet data
+        const cars = [
+            { id: 'eco', name: 'Economy Hatch', desc: 'Great for city trips', rate: 35, img: '' },
+            { id: 'std', name: 'Standard Sedan', desc: 'Comfortable 4-seater', rate: 50, img: '' },
+            { id: 'suv', name: 'Family SUV', desc: 'Space for luggage and family', rate: 75, img: '' },
+            { id: 'lux', name: 'Premium Sedan', desc: 'Executive comfort', rate: 120, img: '' }
+        ];
+
+        const extrasCatalog = {
+            gps: { label: 'GPS', rate: 5 },
+            child: { label: 'Child seat', rate: 3 },
+            ins: { label: 'Premium insurance', rate: 12 }
+        };
+
+        const fleetEl = document.getElementById('fleet');
+        const carSelect = document.getElementById('carSelect');
+
+        // render fleet
+        cars.forEach(car => {
+            const card = document.createElement('div');
+            card.className = 'car';
+            card.innerHTML = `
+                <img alt="${car.name}" src="data:image/svg+xml;utf8,${encodeURIComponent(
+                    `<svg xmlns='http://www.w3.org/2000/svg' width='240' height='140'><rect fill='%23e6f0ff' width='100%' height='100%' rx='8'/><text x='50%' y='50%' fill='%230b74de' font-size='20' font-family='Arial' text-anchor='middle' dominant-baseline='middle'>${car.name}</text></svg>`
+                )}" />
+                <div class="meta">
+                    <h4>${car.name}</h4>
+                    <p>${car.desc} • $${car.rate}/day</p>
+                </div>
+            `;
+            fleetEl.appendChild(card);
+
+            const opt = document.createElement('option');
+            opt.value = car.id;
+            opt.textContent = `${car.name} — $${car.rate}/day`;
+            carSelect.appendChild(opt);
+        });
+
+        // form logic
+        const pickup = document.getElementById('pickup');
+        const dropoff = document.getElementById('dropoff');
+        const extrasEl = document.getElementById('extras');
+        const totalPriceEl = document.getElementById('totalPrice');
+        const estimateDetails = document.getElementById('estimateDetails');
+        const form = document.getElementById('bookingForm');
+        const resetBtn = document.getElementById('resetBtn');
+
+        // set min dates
+        const today = new Date();
+        function toISODate(d){ return d.toISOString().slice(0,10); }
+        pickup.min = toISODate(today);
+        dropoff.min = toISODate(today);
+
+        function getCarById(id){ return cars.find(c => c.id === id) || cars[0]; }
+
+        function calculateEstimate(){
+            const car = getCarById(carSelect.value);
+            const p = pickup.value, d = dropoff.value;
+            if(!p || !d) {
+                totalPriceEl.textContent = '$0.00';
+                estimateDetails.textContent = 'Select dates and a car to see the estimate.';
+                return;
+            }
+            const pd = new Date(p + 'T00:00');
+            const dd = new Date(d + 'T00:00');
+            let days = Math.ceil((dd - pd) / (1000*60*60*24));
+            if(days <= 0) { estimateDetails.textContent = 'Drop-off must be after pick-up.'; totalPriceEl.textContent = '$0.00'; return; }
+            // extras
+            const checkedExtras = Array.from(extrasEl.querySelectorAll('input:checked')).map(i => i.value);
+            let extrasPerDay = checkedExtras.reduce((sum, key) => sum + (extrasCatalog[key]?.rate || 0), 0);
+            const base = car.rate * days;
+            const extrasTotal = extrasPerDay * days;
+            const total = base + extrasTotal;
+            totalPriceEl.textContent = `$${total.toFixed(2)}`;
+            estimateDetails.textContent = `${days} day(s) × $${car.rate}/day = $${base.toFixed(2)}; Extras: $${extrasTotal.toFixed(2)} (${checkedExtras.length} selected)`;
+        }
+
+        // attach listeners
+        [carSelect, pickup, dropoff, extrasEl].forEach(el => el.addEventListener('change', calculateEstimate));
+        extrasEl.addEventListener('click', e => { if(e.target.tagName === 'INPUT') calculateEstimate(); });
+
+        form.addEventListener('submit', (ev) => {
+            ev.preventDefault();
+            // basic validation
+            if(!form.checkValidity()){
+                form.reportValidity();
+                return;
+            }
+            const p = new Date(pickup.value + 'T00:00');
+            const d = new Date(dropoff.value + 'T00:00');
+            if(d <= p){ alert('Drop-off date must be after pick-up date.'); return; }
+
+            const payload = {
+                name: document.getElementById('name').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                phone: document.getElementById('phone').value.trim(),
+                car: getCarById(carSelect.value).name,
+                pickup: pickup.value,
+                dropoff: dropoff.value,
+                extras: Array.from(extrasEl.querySelectorAll('input:checked')).map(i=>extrasCatalog[i.value]?.label || i.value),
+                estimate: totalPriceEl.textContent
+            };
+
+            // "submit" demonstration: show summary and store in local storage
+            localStorage.setItem('lastBooking', JSON.stringify(payload));
+            alert('Booking request submitted!\n\n' + [
+                `Name: ${payload.name}`,
+                `Car: ${payload.car}`,
+                `Pickup: ${payload.pickup}`,
+                `Dropoff: ${payload.dropoff}`,
+                `Extras: ${payload.extras.join(', ') || 'None'}`,
+                `Estimate: ${payload.estimate}`
+            ].join('\n'));
+            form.reset();
+            calculateEstimate();
+        });
+
+        resetBtn.addEventListener('click', () => { form.reset(); calculateEstimate(); });
+
+        // initialize estimate on load
+        calculateEstimate();
+    </script>
+</body>
+</html>

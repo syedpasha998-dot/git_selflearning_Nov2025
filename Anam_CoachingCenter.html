@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Anam Coaching Center</title>
+    <style>
+        :root{
+            --bg:#f7f9fc;
+            --card:#ffffff;
+            --accent:#2b6cb0;
+            --muted:#6b7280;
+            --radius:10px;
+            --maxw:1100px;
+        }
+        *{box-sizing:border-box}
+        body{
+            margin:0;
+            font-family: system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+            background:linear-gradient(180deg,var(--bg),#eef4fb);
+            color:#111827;
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
+            line-height:1.45;
+        }
+        .container{max-width:var(--maxw);margin:28px auto;padding:20px;}
+        header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
+        .brand{display:flex;align-items:center;gap:12px}
+        .logo{
+            width:56px;height:56px;border-radius:12px;background:var(--accent);display:grid;place-items:center;color:#fff;font-weight:700;font-size:20px;
+            box-shadow:0 6px 20px rgba(43,108,176,0.18)
+        }
+        nav a{color:var(--muted);text-decoration:none;margin-left:14px;font-weight:600}
+        nav a:hover{color:var(--accent)}
+        main{display:grid;gap:24px}
+        .hero{
+            display:grid;
+            grid-template-columns:1fr;
+            gap:18px;
+            align-items:center;
+            background:linear-gradient(90deg,#fff,#fbfdff);
+            padding:22px;
+            border-radius:var(--radius);
+            box-shadow:0 6px 28px rgba(17,24,39,0.06);
+        }
+        .hero-inner{display:flex;flex-direction:column;gap:12px}
+        .h-title{font-size:1.6rem;margin:0}
+        .h-lead{color:var(--muted);margin:0}
+        .cta-row{display:flex;gap:12px;flex-wrap:wrap}
+        .btn{
+            background:var(--accent);color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none;border:0;cursor:pointer;font-weight:700;
+            box-shadow:0 6px 18px rgba(43,108,176,0.18)
+        }
+        .btn.secondary{background:transparent;color:var(--accent);border:2px solid rgba(43,108,176,0.12);font-weight:700}
+        .grid{
+            display:grid;
+            gap:18px;
+            grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+        }
+        .card{
+            background:var(--card);
+            padding:16px;
+            border-radius:12px;
+            box-shadow:0 6px 20px rgba(2,6,23,0.05);
+        }
+        h3{margin:0 0 8px 0}
+        p{margin:0;color:var(--muted)}
+        .courses .course{display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:10px;border:1px solid #eef3fb}
+        .course .tag{background:#eef6ff;color:var(--accent);padding:6px 8px;border-radius:8px;font-weight:700;font-size:13px}
+        table{width:100%;border-collapse:collapse}
+        th,td{padding:10px;text-align:left;border-bottom:1px solid #f1f5f9}
+        .testimonial{font-style:italic;color:#0f172a88}
+        form{display:grid;gap:10px}
+        label{font-size:13px;color:var(--muted)}
+        input[type="text"],input[type="email"],textarea,select{
+            padding:10px;border-radius:8px;border:1px solid #e6eef8;background:#fff;width:100%;
+            font:inherit;
+        }
+        .row{display:flex;gap:12px}
+        .row .col{flex:1}
+        footer{margin-top:20px;text-align:center;color:var(--muted);font-size:13px}
+        @media(min-width:880px){
+            .hero{grid-template-columns:1fr 360px}
+            .hero .hero-left{padding-right:10px}
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="brand">
+                <div class="logo" aria-hidden="true">AC</div>
+                <div>
+                    <div style="font-weight:800">Anam Coaching Center</div>
+                    <div style="font-size:13px;color:var(--muted)">Trusted coaching since 2015</div>
+                </div>
+            </div>
+            <nav aria-label="Main navigation">
+                <a href="#about">About</a>
+                <a href="#courses">Courses</a>
+                <a href="#schedule">Schedule</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="hero" aria-labelledby="hero-heading">
+                <div class="hero-left">
+                    <div class="hero-inner">
+                        <h1 id="hero-heading" class="h-title">Achieve success with focused coaching</h1>
+                        <p class="h-lead">Small batches, experienced tutors, personalized study plans for board & competitive exams.</p>
+                        <div class="cta-row">
+                            <button class="btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book Free Trial</button>
+                            <a class="btn secondary" href="#courses">View Courses</a>
+                        </div>
+                        <div style="margin-top:8px;color:var(--muted);font-size:13px">Flexible schedules • Online & offline classes • Progress tracking</div>
+                    </div>
+                </div>
+
+                <aside class="card" aria-label="Quick info">
+                    <h3>Why choose us</h3>
+                    <ul style="margin:10px 0 0 18px;color:var(--muted)">
+                        <li>Experienced faculty with proven results</li>
+                        <li>Small batches (max 15)</li>
+                        <li>Weekly tests & feedback</li>
+                    </ul>
+                </aside>
+            </section>
+
+            <section id="about" class="card" aria-labelledby="about-heading">
+                <h3 id="about-heading">About Anam Coaching Center</h3>
+                <p style="margin-top:8px">We provide tailored coaching for school boards and competitive exams. Our focus is conceptual clarity, regular assessments and mentoring to help students perform their best academically.</p>
+            </section>
+
+            <section id="courses" class="card courses" aria-labelledby="courses-heading">
+                <h3 id="courses-heading">Courses</h3>
+                <div class="grid" style="margin-top:12px">
+                    <div class="course">
+                        <div class="tag">JEE</div>
+                        <div>
+                            <strong>JEE Main & Advanced</strong>
+                            <div style="color:var(--muted);font-size:13px">In-depth physics, chemistry & math coaching with mock tests.</div>
+                        </div>
+                    </div>
+
+                    <div class="course">
+                        <div class="tag">NEET</div>
+                        <div>
+                            <strong>NEET</strong>
+                            <div style="color:var(--muted);font-size:13px">Biology-focused program with problem-solving sessions.</div>
+                        </div>
+                    </div>
+
+                    <div class="course">
+                        <div class="tag">Class 10-12</div>
+                        <div>
+                            <strong>Board Exam Prep</strong>
+                            <div style="color:var(--muted);font-size:13px">Comprehensive syllabus coverage and doubt clearing.</div>
+                        </div>
+                    </div>
+
+                    <div class="course">
+                        <div class="tag">Online</div>
+                        <div>
+                            <strong>Live Online Classes</strong>
+                            <div style="color:var(--muted);font-size:13px">Interactive sessions, recorded lectures and study materials.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="schedule" class="card" aria-labelledby="schedule-heading">
+                <h3 id="schedule-heading">Weekly Schedule</h3>
+                <table aria-describedby="schedule-desc" style="margin-top:10px">
+                    <caption id="schedule-desc" style="caption-side:top;text-align:left;color:var(--muted);font-size:13px;margin-bottom:6px">Select batch timings as per your convenience</caption>
+                    <thead>
+                        <tr><th>Day</th><th>Time</th><th>Batch</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Mon-Wed-Fri</td><td>4:00pm - 6:00pm</td><td>Weekday Evening</td></tr>
+                        <tr><td>Tue-Thu</td><td>6:30pm - 8:30pm</td><td>Late Evening</td></tr>
+                        <tr><td>Sat-Sun</td><td>9:30am - 12:30pm</td><td>Weekend Intensive</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="card" aria-labelledby="testimonials-heading">
+                <h3 id="testimonials-heading">What students say</h3>
+                <p class="testimonial" style="margin-top:8px">"The mentors here helped me build confidence and clear my concepts. Regular tests kept me on track." — A. Kapoor</p>
+            </section>
+
+            <section id="contact" class="card" aria-labelledby="contact-heading">
+                <h3 id="contact-heading">Contact & Inquiry</h3>
+                <form id="contactForm" novalidate>
+                    <div class="row">
+                        <div class="col">
+                            <label for="name">Full name</label>
+                            <input id="name" name="name" type="text" required placeholder="Your name">
+                        </div>
+                        <div class="col">
+                            <label for="email">Email</label>
+                            <input id="email" name="email" type="email" required placeholder="you@example.com">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="interest">Interested Course</label>
+                        <select id="interest" name="interest">
+                            <option>JEE - Mains/Advanced</option>
+                            <option>NEET</option>
+                            <option>Board Exams (10/12)</option>
+                            <option>Live Online Classes</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="message">Message / Query</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Describe your query"></textarea>
+                    </div>
+                    <div style="display:flex;gap:10px;align-items:center">
+                        <button class="btn" type="submit">Send Inquiry</button>
+                        <div id="formStatus" style="color:var(--muted);font-size:13px"></div>
+                    </div>
+                </form>
+            </section>
+        </main>
+
+        <footer>
+            <div>Anam Coaching Center — Address: 123 Learning Lane, City</div>
+            <div style="margin-top:6px">Phone: +91 98765 43210 · Email: info@anamcenter.example</div>
+            <div style="margin-top:8px">© <span id="year"></span> Anam Coaching Center. All rights reserved.</div>
+        </footer>
+    </div>
+
+    <script>
+        // Set current year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Simple client-side form handling (no external submission)
+        document.getElementById('contactForm').addEventListener('submit', function(e){
+            e.preventDefault();
+            var name = document.getElementById('name').value.trim();
+            var email = document.getElementById('email').value.trim();
+            if(!name || !email){
+                showStatus('Please provide name and email.', true);
+                return;
+            }
+            // Simulate submission
+            showStatus('Thank you! Your inquiry has been received. We will contact you shortly.', false);
+            this.reset();
+        });
+
+        function showStatus(msg, isError){
+            var el = document.getElementById('formStatus');
+            el.textContent = msg;
+            el.style.color = isError ? '#b91c1c' : 'var(--accent)';
+        }
+    </script>
+</body>
+</html>
